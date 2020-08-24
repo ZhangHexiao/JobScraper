@@ -6,16 +6,61 @@ router.route('/').get((req, res) => {
     .then(jobScrapeds => res.json(jobScrapeds))
     .catch(err => res.status(400).json('Error: ' + err));
 });
-
+//************************************************* */
+// Add a new job information, only title is required
 router.route('/add').post((req, res) => {
   const title = req.body.title;
-//   const description = req.body.description;
-//   const duration = Number(req.body.duration);
-//   const date = Date.parse(req.body.date);
-  const newJob = new JobScraped({title});
+  const company = req.body.company;
+  const location = req.body.location;
+  const remoteOrOffice = req.body.remoteOrOffice;
+  const compensation = req.body.compensation;
+  const requirement = req.body.requirement;
+  const summary = req.body.summary;
+  const postTime = req.body.postTime;
+
+  const newJob = new JobScraped({title, company, location, remoteOrOffice, compensation, requirement, summary, postTime});
   newJob.save()
   .then(() => res.json('Job added!'))
   .catch(err => res.status(400).json('Error: ' + err));
 });
-
+//************************************************* */
+// Get all job information
+router.route('/:id').get((req, res) => {
+  JobScraped.findById(req.params.id)
+    .then(jobScraped => res.json(jobScraped))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+//************************************************* */
+// Delete a job information, change hidden to true, soft delete
+router.route('/:id').delete((req, res) => {
+  JobScraped.findById(req.params.id)
+  .then(jobScraped=> {
+    jobScraped.hided = true;
+    jobScraped.save()
+      .then(() => res.json('job deleted!'))
+      .catch(err => res.status(400).json('Error: ' + err));
+  })
+  .catch(err => res.status(400).json('Error: ' + err));
+});
+//***************************************************/
+// Update a job information
+router.route('/update/:id').post((req, res) => {
+  JobScraped.findById(req.params.id)
+    .then(jobScraped=> {  
+      jobScraped.title = req.body.title;
+      jobScraped.company = req.body.description;
+      jobScraped.location  = req.body.location;
+      jobScraped.remoteOrOffice  = req.body.remoteOrOffice;
+      jobScraped.compensation  = req.body.compensation;
+      jobScraped.requirement  = req.body.requirement;
+      jobScraped.summary  = req.body.summary;
+      jobScraped.postTime  = req.body.postTime;
+      jobScraped.personalTag  = req.body.personalTag;
+      jobScraped.save()
+        .then(() => res.json('job add personal tag!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+//***************************************************/
 module.exports = router

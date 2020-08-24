@@ -11,7 +11,11 @@ const jobScrapedSchema = new Schema({
     compensation: String,
     requirement: String,
     summary: String,
-    postTime: String
+    postTime: String,
+    hided : {
+      type: Boolean,
+      default: false
+  }
 }, {
   timestamps: true,
 });
