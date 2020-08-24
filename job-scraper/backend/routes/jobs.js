@@ -1,7 +1,6 @@
 const router = require('express').Router();
 let JobScraped = require('../models/jobScraped.model');
-//************************************************* */
-// Get all job information
+
 router.route('/').get((req, res) => {
     JobScraped.find()
     .then(jobScrapeds => res.json(jobScrapeds))
