@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./components/navbar.component"
 import JobsList from "./components/job-list.component";
 import EditJob from "./components/edit-job.component";
-import CreateJob from "./components/add-job.component";
+import AddJob from "./components/add-job.component";
 import addTag from "./components/add-tag.component";
  
 function App() {
@@ -19,7 +19,7 @@ function App() {
   <br/>
   <Route path="/" exact component={JobsList} />
   <Route path="/edit/:id" component={EditJob} />
-  <Route path="/add" component={CreateJob} />
+  <Route path="/create" component={AddJob} />
   <Route path="/update/:id" component={addTag} />
   </div>
   </Router>

@@ -12,7 +12,7 @@ export default class Navbar extends Component {
           <Link to="/" className="nav-link">Jobs</Link>
           </li> */}
           <li className="navbar-item">
-          <Link to="/add" className="nav-link">Create job</Link>
+          <Link to="/create" className="nav-link">Create job</Link>
           </li>
           {/* <li className="navbar-item">
           <Link to="/update/:id" className="nav-link">add custome tag</Link>

@@ -4,7 +4,7 @@ export default class addTag extends Component {
   render() {
     return (
       <div>
-        <p>You are on the Create job component!</p>
+        <p>You are on the add tage component!</p>
       </div>
     )
   }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 // import DatePicker from 'react-datepicker';
 // import "react-datepicker/dist/react-datepicker.css";
 
-export default class CreateExercise extends Component {
+export default class AddJob extends Component {
   constructor(props) {
 
     super(props);
@@ -89,6 +90,9 @@ export default class CreateExercise extends Component {
       postTime: this.state.postTime
     };
     console.log(job);
+    axios.post('http://localhost:3000//jobs/add', job)
+    .then(res => console.log(res.data));
+
     window.location = '/';
   }
 
