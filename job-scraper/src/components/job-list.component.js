@@ -25,10 +25,11 @@ const JobScraped = props => (
 export default class JobList extends Component { 
   constructor(props) {
     super(props);
-
+    this.searchJob = this.searchJob.bind(this);
+    this.onChangeKeyword = this.onChangeKeyword.bind(this);
     this.deleteJob = this.deleteJob.bind(this)
 
-    this.state = {jobScrapeds: []};
+    this.state = {jobScrapeds: [], keyword: ''};
   }
 
   componentDidMount() {
@@ -40,6 +41,11 @@ export default class JobList extends Component {
         console.log(error);
       })
   }
+  onChangeKeyword(e) {
+    this.setState({
+      keyword: e.target.value
+    });
+  }
 
   deleteJob(id) {
     axios.delete('http://localhost:5000/jobs/'+id)
@@ -48,6 +54,13 @@ export default class JobList extends Component {
     this.setState({
       jobScrapeds: this.state.jobScrapeds.filter(el => (el.hided === false))
     })
+  }
+
+  searchJob(keyword) {
+    axios.get('http://localhost:5000/jobs/search/'+keyword)
+      .then(response => { this.setState({
+        jobScrapeds: this.state.jobScrapeds = response.data
+      })});
   }
 
   jobList() {
@@ -60,6 +73,14 @@ export default class JobList extends Component {
     return (
       <div>
         <h3>Job Information</h3>
+        <form onSubmit={this.searchJobs}>
+          <input
+            placeholder="Search for..."
+            value={this.state.keyword}
+            onChange={this.onChangeKeyword}
+          /> 
+        <input type="submit" value="Search" className="btn btn-primary" />
+        </form>
         <table className="table">
           <thead className="thead-light">
             <tr>
