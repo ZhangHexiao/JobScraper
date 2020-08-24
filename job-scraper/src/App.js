@@ -17,7 +17,7 @@ function App() {
   <div className="container">
   <Navbar />
   <br/>
-  {/* <Route path="/" exact component={JobsList} /> */}
+  <Route path="/" exact component={JobsList} />
   {/* <Route path="/edit/:id" component={EditJob} /> */}
   <Route path="/create" component={AddJob} />
   {/* <Route path="/update/:id" component={addTag} /> */}
