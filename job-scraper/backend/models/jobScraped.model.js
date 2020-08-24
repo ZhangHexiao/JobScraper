@@ -12,13 +12,14 @@ const jobScrapedSchema = new Schema({
     requirement: String,
     summary: String,
     postTime: String,
+    tag: String,
     hided : {
       type: Boolean,
       default: false
   }
 }, {
-  timestamps: true,
-});
+  timestamps: true
+},);
 
 const JobScraped = mongoose.model('JobScraped', jobScrapedSchema);
 

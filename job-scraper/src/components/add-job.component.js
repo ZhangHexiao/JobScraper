@@ -90,7 +90,7 @@ export default class AddJob extends Component {
       postTime: this.state.postTime
     };
     console.log(job);
-    axios.post('http://localhost:3000//jobs/add', job)
+    axios.post('http://localhost:5000/jobs/add', job)
     .then(res => console.log(res.data));
 
     window.location = '/';
