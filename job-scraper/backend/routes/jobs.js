@@ -18,8 +18,7 @@ router.route('/add').post((req, res) => {
   const summary = req.body.summary;
   const postTime = req.body.postTime;
 
-  const newJob = new JobScraped({title, 
-    company, location, remoteOrOffice, compensation, requirement, summary, postTime});
+  const newJob = new JobScraped({title, company, location, remoteOrOffice, compensation, requirement, summary, postTime});
   newJob.save()
   .then(() => res.json('Job added!'))
   .catch(err => res.status(400).json('Error: ' + err));
@@ -49,7 +48,7 @@ router.route('/update/:id').post((req, res) => {
   JobScraped.findById(req.params.id)
     .then(jobScraped=> {  
       jobScraped.title = req.body.title;
-      jobScraped.company = req.body.description;
+      jobScraped.company = req.body.company;
       jobScraped.location  = req.body.location;
       jobScraped.remoteOrOffice  = req.body.remoteOrOffice;
       jobScraped.compensation  = req.body.compensation;
@@ -58,7 +57,7 @@ router.route('/update/:id').post((req, res) => {
       jobScraped.postTime  = req.body.postTime;
       jobScraped.personalTag  = req.body.personalTag;
       jobScraped.save()
-        .then(() => res.json('job update tag!'))
+        .then(() => res.json('job update!'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));

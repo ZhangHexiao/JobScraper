@@ -12,7 +12,12 @@ const JobScraped = props => (
     <td>{props.jobScraped.requiremen}</td>
     <td>{props.jobScraped.postTime}</td>
     <td>
-      <Link to={"/edit/"+props.jobScraped._id}>edit</Link> | <a href="#" onClick={() => { props.deleteJob(props.jobScraped._id) }}>delete</a>
+    <Link to={"/edit/"+props.jobScraped._id}>edit</Link> ||
+    <a href="#" onClick={() => { props.deleteJob(props.jobScraped._id) }}>delete</a>
+    </td>
+    <td>
+    {props.jobScraped.tag}||
+    <Link to={"/tagAdd/"+props.jobScraped._id}>Add Tag</Link>
     </td>
   </tr>
 )
@@ -29,7 +34,6 @@ export default class JobList extends Component {
   componentDidMount() {
     axios.get('http://localhost:5000/jobs/')
       .then(response => {
-        // console.log(response);
         this.setState({ jobScrapeds: response.data })
       })
       .catch((error) => {
@@ -42,7 +46,7 @@ export default class JobList extends Component {
       .then(response => { console.log(response.data)});
 
     this.setState({
-      jobScrapeds: this.state.jobScrapeds.filter(el => el.hided !== false)
+      jobScrapeds: this.state.jobScrapeds.filter(el => (el.hided === false))
     })
   }
 
@@ -67,6 +71,7 @@ export default class JobList extends Component {
               <th>Requirement</th>
               <th>post Time</th>
               <th>Actions</th>
+              <th>Tag</th>
             </tr>
           </thead>
           <tbody>
@@ -77,13 +82,3 @@ export default class JobList extends Component {
     )
   }
 }
-
-// export default class addTag extends Component {
-//   render() {
-//     return (
-//       <div>
-//         <p>You are on the add tage component!</p>
-//       </div>
-//     )
-//   }
-// }

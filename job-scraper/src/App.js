@@ -6,8 +6,8 @@ import Navbar from "./components/navbar.component"
 import JobsList from "./components/job-list.component";
 import EditJob from "./components/edit-job.component";
 import AddJob from "./components/add-job.component";
-import addTag from "./components/add-tag.component";
- 
+import TagAdd from "./components/tag-add.component";
+
 function App() {
  return (
 //   <div className="container">
@@ -18,9 +18,9 @@ function App() {
   <Navbar />
   <br/>
   <Route path="/" exact component={JobsList} />
-  {/* <Route path="/edit/:id" component={EditJob} /> */}
+  <Route path="/edit/:id" component={EditJob} />
   <Route path="/create" component={AddJob} />
-  {/* <Route path="/update/:id" component={addTag} /> */}
+  <Route path="/tagAdd/:id" component={TagAdd} />
   </div>
   </Router>
  );

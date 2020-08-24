@@ -29,7 +29,7 @@ export default class EditJob extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/jobs/'+this.props.match.params.id)
+    axios.get('http://localhost:5000/jobs/'+this.props.match.params.id)
       .then(response => {
         this.setState({
           title: response.data.title,
