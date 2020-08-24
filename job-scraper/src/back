@@ -10,19 +10,19 @@ import addTag from "./components/add-tag.component";
  
 function App() {
  return (
-//   <div className="container">
-//   Hello World
-// </div>
-  <Router>
   <div className="container">
-  <Navbar />
-  <br/>
-  <Route path="/" exact component={JobsList} />
-  <Route path="/edit/:id" component={EditJob} />
-  <Route path="/add" component={CreateJob} />
-  <Route path="/update/:id" component={addTag} />
-  </div>
-  </Router>
+  Hello World
+</div>
+  // <Router>
+  // <div className="container">
+  // <Navbar />
+  // <br/>
+  // <Route path="/" exact component={JobsList} />
+  // <Route path="/edit/:id" component={EditJob} />
+  // <Route path="/add" component={CreateJob} />
+  // <Route path="/update/:id" component={addTag} />
+  // </div>
+  // </Router>
  );
 }
  

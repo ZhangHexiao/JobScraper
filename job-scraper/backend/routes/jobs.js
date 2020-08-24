@@ -1,6 +1,7 @@
 const router = require('express').Router();
 let JobScraped = require('../models/jobScraped.model');
-
+//************************************************* */
+// Get all job information
 router.route('/').get((req, res) => {
     JobScraped.find()
     .then(jobScrapeds => res.json(jobScrapeds))
@@ -24,7 +25,7 @@ router.route('/add').post((req, res) => {
   .catch(err => res.status(400).json('Error: ' + err));
 });
 //************************************************* */
-// Get all job information
+// Get one job information
 router.route('/:id').get((req, res) => {
   JobScraped.findById(req.params.id)
     .then(jobScraped => res.json(jobScraped))
