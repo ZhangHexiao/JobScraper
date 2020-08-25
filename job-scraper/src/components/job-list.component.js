@@ -48,15 +48,19 @@ export default class JobList extends Component {
   }
 
   deleteJob(id) {
+
     axios.delete('http://localhost:5000/jobs/'+id)
       .then(response => { console.log(response.data)});
 
     this.setState({
       jobScrapeds: this.state.jobScrapeds.filter(el => (el.hided === false))
     })
+
+     window.location = '/';
   }
 
   searchJob(keyword) {
+    console.log(keyword)
     axios.get('http://localhost:5000/jobs/search/'+keyword)
       .then(response => { this.setState({
         jobScrapeds: this.state.jobScrapeds = response.data

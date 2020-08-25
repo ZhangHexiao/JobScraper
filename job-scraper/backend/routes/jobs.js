@@ -2,7 +2,7 @@ const router = require('express').Router();
 let JobScraped = require('../models/jobScraped.model');
 
 router.route('/').get((req, res) => {
-    JobScraped.find()
+    JobScraped.find({hided : false})
     .then(jobScrapeds => res.json(jobScrapeds))
     .catch(err => res.status(400).json('Error: ' + err));
 });
