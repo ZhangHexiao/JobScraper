@@ -7,6 +7,7 @@ import JobsList from "./components/job-list.component";
 import EditJob from "./components/edit-job.component";
 import AddJob from "./components/add-job.component";
 import TagAdd from "./components/tag-add.component";
+import SearchJob from "./components/job-search.component";
 
 function App() {
  return (
@@ -21,6 +22,7 @@ function App() {
   <Route path="/edit/:id" component={EditJob} />
   <Route path="/create" component={AddJob} />
   <Route path="/tagAdd/:id" component={TagAdd} />
+  <Route path="/search" component={SearchJob} />
   </div>
   </Router>
  );

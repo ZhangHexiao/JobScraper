@@ -22,10 +22,10 @@ const JobScraped = props => (
   </tr>
 )
 
-export default class JobList extends Component { 
+export default class SearchJob extends Component { 
   constructor(props) {
     super(props);
-    // this.searchJob = this.searchJob.bind(this);
+    this.searchJob = this.searchJob.bind(this);
     this.onChangeKeyword = this.onChangeKeyword.bind(this);
     this.deleteJob = this.deleteJob.bind(this)
 
@@ -33,7 +33,7 @@ export default class JobList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/jobs/')
+    axios.get('http://localhost:5000/jobs/search/'+localStorage.getItem("keywordStored"))
       .then(response => {
         this.setState({ jobScrapeds: response.data })
       })
@@ -48,25 +48,37 @@ export default class JobList extends Component {
   }
 
   deleteJob(id) {
-
     axios.delete('http://localhost:5000/jobs/'+id)
       .then(response => { console.log(response.data)});
 
     this.setState({
       jobScrapeds: this.state.jobScrapeds.filter(el => (el.hided === false))
     })
-
-     window.location = '/';
+     window.location = '/search';
   }
 
-  // searchJob(keyword) {
-  //   console.log(keyword)
-    // axios.get('http://localhost:5000/jobs/search/'+keyword)
-    //   .then(response => { this.setState({
-    //     jobScrapeds: this.state.jobScrapeds = response.data
-    //   })});
-    // window.location = '/search/' + keyword;  
-  // }
+  searchJob(e) {
+    e.preventDefault();
+    localStorage.setItem("keywordStored", this.state.keyword);
+    axios.get('http://localhost:5000/jobs/search/'+this.state.keyword)
+      .then(response => {
+        this.setState({ jobScrapeds: response.data })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    //====test code for list==========
+    // axios.get('http://localhost:5000/jobs/')
+    // .then(response => {
+    //   this.setState({ jobScrapeds: response.data })
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // })
+    //==================================/
+
+    //   window.location = '/search';  
+  }
 
   jobList() {
     return this.state.jobScrapeds.map(currentjob => {
@@ -77,15 +89,15 @@ export default class JobList extends Component {
   render() {
     return (
       <div>
-        <h3>Job Information</h3>
-        {/* <form onSubmit={this.searchJob}>
+        <h3>Job Search</h3>
+        <form onSubmit={this.searchJob}>
           <input
-            placeholder="Search for..."
+            placeholder = {localStorage.getItem("keywordStored")}
             value={this.state.keyword}
             onChange={this.onChangeKeyword}
           /> 
         <input type="submit" value="Search" className="btn btn-primary" />
-        </form> */}
+        </form>
         <table className="table">
           <thead className="thead-light">
             <tr>

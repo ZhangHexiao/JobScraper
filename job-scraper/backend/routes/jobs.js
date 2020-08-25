@@ -75,10 +75,14 @@ router.route('/addTag/:id').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 //***************************************************/
-// Search page's information
 router.route('/search/:keyword').get((req, res) => {
   JobScraped.find(
-    { $or: [{ title: new RegExp(keyword) }, { company: new RegExp(keyword) }, { location: new RegExp(keyword) },{ remoteOrOffice: new RegExp(keyword) },{ compensation: new RegExp(keyword) },{ requirement: new RegExp(keyword) }] },
+    { $or: [{title: new RegExp(req.params.keyword, "i")}, 
+            {company: new RegExp(req.params.keyword, "i")},
+            {location: new RegExp(req.params.keyword, "i")},
+            {requirement: new RegExp(req.params.keyword, "i")},
+            {remoteOrOffice: new RegExp(req.params.keyword, "i")},
+            {postTime: new RegExp(req.params.keyword, "i")}]}
   )
   .then(jobScrapeds => res.json(jobScrapeds))
   .catch(err => res.status(400).json('Error: ' + err));
